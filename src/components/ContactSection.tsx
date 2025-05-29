@@ -97,7 +97,7 @@ const ContactSection = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/nitishnaik',
+      url: 'https://github.com/nitish-naik',
       color: 'hover:text-gray-300',
       description: 'Check out my code'
     },

@@ -198,7 +198,7 @@ const ProjectsSection = () => {
         <div className="text-center mt-12">
           <Button
             className="cyber-button group"
-            onClick={() => window.open('https://github.com/nitishnaik', '_blank')}
+            onClick={() => window.open('https://github.com/nitish-naik', '_blank')}
           >
             <Github className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
             View All Projects on GitHub

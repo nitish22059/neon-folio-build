@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, Download, ChevronDown } from 'lucide-react';
@@ -77,7 +76,7 @@ const HeroBanner = () => {
             <Button 
               variant="outline" 
               className="neon-border hover:bg-neon-purple/10 group"
-              onClick={() => window.open('https://github.com/nitishnaik', '_blank')}
+              onClick={() => window.open('https://github.com/nitish-naik', '_blank')}
             >
               <Github className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
               GitHub
