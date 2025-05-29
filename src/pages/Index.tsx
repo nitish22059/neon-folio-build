@@ -1,14 +1,18 @@
 
 import { useEffect } from 'react';
+import NavigationBar from '@/components/NavigationBar';
 import HeroBanner from '@/components/HeroBanner';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import CertificationsSection from '@/components/CertificationsSection';
+import BlogSection from '@/components/BlogSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import VisitorCounter from '@/components/VisitorCounter';
 
 const Index = () => {
   useEffect(() => {
@@ -29,7 +33,7 @@ const Index = () => {
     ║    This site was built with React, TypeScript, and lots     ║
     ║    of caffeine. Want to collaborate? Let's connect!          ║
     ║                                                               ║
-    ║    GitHub: https://github.com/nitishnaik                     ║
+    ║    GitHub: https://github.com/nitish-naik                    ║
     ║    Email: nitish@example.com                                  ║
     ║                                                               ║
     ╚═══════════════════════════════════════════════════════════════╝
@@ -54,6 +58,11 @@ const Index = () => {
         console.log('%c💼 Featured projects:', 'color: #EC4899; font-weight: bold;');
         console.log('DevTracker, Code Collab, AI Study Buddy, and more!');
         return 'Scroll to projects section to see them all!';
+      },
+      blog: () => {
+        console.log('%c📝 Latest articles:', 'color: #F59E0B; font-weight: bold;');
+        console.log('Building Scalable React Applications, AI-Powered Tools, and more!');
+        return 'Check out the blog section for all articles!';
       }
     };
 
@@ -75,6 +84,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Navigation */}
+      <NavigationBar />
+      
       {/* Hero Section */}
       <HeroBanner />
       
@@ -93,6 +105,12 @@ const Index = () => {
       {/* Certifications Section */}
       <CertificationsSection />
       
+      {/* Blog Section */}
+      <BlogSection />
+      
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+      
       {/* Contact Section */}
       <ContactSection />
       
@@ -101,6 +119,9 @@ const Index = () => {
       
       {/* Scroll to Top Button */}
       <ScrollToTop />
+      
+      {/* Visitor Counter */}
+      <VisitorCounter />
     </div>
   );
 };
