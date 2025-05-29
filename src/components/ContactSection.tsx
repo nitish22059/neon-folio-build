@@ -6,14 +6,26 @@ import { Textarea } from '@/components/ui/textarea';
 import { Github, Linkedin, Mail, Send, CheckCircle, AlertCircle, MapPin, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const { toast } = useToast();
 
   const validateEmail = (email: string) => {
@@ -22,7 +34,7 @@ const ContactSection = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -76,7 +88,7 @@ const ContactSection = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
     
     // Clear error when user starts typing
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
