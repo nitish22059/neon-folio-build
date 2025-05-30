@@ -24,6 +24,15 @@ const HeroBanner = () => {
     window.location.href = 'mailto:nitish@example.com';
   };
 
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/resume-nitish-naik.pdf';
+    link.download = 'Nitish-Naik-Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated background grid */}
@@ -68,7 +77,10 @@ const HeroBanner = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center mt-12">
-            <Button className="cyber-button group">
+            <Button 
+              className="cyber-button group"
+              onClick={handleResumeDownload}
+            >
               <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
               Resume
             </Button>
