@@ -70,8 +70,8 @@ export default {
 					green: '#10B981'
 				},
 				cyber: {
-					dark: '#0a0a0f',
-					gray: '#1a1a2e',
+					dark: 'hsl(var(--background))',
+					gray: 'hsl(var(--muted))',
 					purple: '#6366f1',
 					blue: '#3b82f6'
 				}

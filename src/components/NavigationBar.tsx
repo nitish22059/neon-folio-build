@@ -1,107 +1,86 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-
-  const navItems = [
-    { id: 'home', label: 'Home', href: '#' },
-    { id: 'about', label: 'About', href: '#about' },
-    { id: 'skills', label: 'Skills', href: '#skills' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'experience', label: 'Experience', href: '#experience' },
-    { id: 'contact', label: 'Contact', href: '#contact' }
-  ];
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => document.querySelector(item.href === '#' ? 'body' : item.href) as HTMLElement);
-      const scrollPos = window.scrollY + 100;
-
-      sections.forEach((section, index) => {
-        if (section) {
-          const top = section.offsetTop;
-          const bottom = top + section.offsetHeight;
-          
-          if (scrollPos >= top && scrollPos <= bottom) {
-            setActiveSection(navItems[index].id);
-          }
-        }
-      });
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    setIsOpen(false);
-  };
+  const navItems = [
+    { href: '#about', label: 'About' },
+    { href: '#skills', label: 'Skills' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#blog', label: 'Blog' },
+    { href: '#contact', label: 'Contact' }
+  ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-neon-purple/20">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? 'bg-cyber-dark/90 backdrop-blur-md border-b border-neon-purple/20' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="font-cyber font-bold text-xl gradient-text">
+          <a 
+            href="#" 
+            className="text-xl font-cyber font-bold gradient-text hover:scale-105 transition-transform"
+          >
             NITISH.DEV
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.href)}
-                className={`transition-colors duration-300 ${
-                  activeSection === item.id
-                    ? 'text-neon-purple'
-                    : 'text-gray-300 hover:text-neon-purple'
-                }`}
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-gray-300 hover:text-neon-purple transition-colors duration-300 font-medium relative group"
               >
                 {item.label}
-              </button>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-neon-purple transition-all duration-300 group-hover:w-full"></span>
+              </a>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          <div className="flex items-center space-x-4 md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-300 hover:text-neon-purple"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-2">
+          <div className="md:hidden bg-cyber-dark/95 backdrop-blur-md border-t border-neon-purple/20">
+            <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`text-left py-2 px-4 rounded transition-colors duration-300 ${
-                    activeSection === item.id
-                      ? 'text-neon-purple bg-neon-purple/10'
-                      : 'text-gray-300 hover:text-neon-purple hover:bg-neon-purple/5'
-                  }`}
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="block px-3 py-2 text-gray-300 hover:text-neon-purple transition-colors duration-300"
+                  onClick={() => setIsOpen(false)}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
             </div>
           </div>
