@@ -18,7 +18,7 @@ const NavigationBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => document.querySelector(item.href === '#' ? 'body' : item.href));
+      const sections = navItems.map(item => document.querySelector(item.href === '#' ? 'body' : item.href) as HTMLElement);
       const scrollPos = window.scrollY + 100;
 
       sections.forEach((section, index) => {
